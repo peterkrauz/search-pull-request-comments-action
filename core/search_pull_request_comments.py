@@ -16,9 +16,10 @@ def search_comments(github_info, token: str, required_user: str):
     if isinstance(github_info, str):
         github_info = loads(github_info)
 
-    pr_details = github_info["event"]["pull_request"]
-    links = pr_details["_links"]
+    if "event" in github_info:
+        github_info = github_info["event"]
 
+    links = github_info["pull_request"]["_links"]
     simple_comments = fetch(links["comments"]["href"], token)
     review_comments = fetch(links["review_comments"]["href"], token)
 
@@ -34,4 +35,5 @@ def search_comments(github_info, token: str, required_user: str):
 if __name__ == "__main__":
     import sys
 
-    print(search_comments(sys.argv[1], sys.argv[2], sys.argv[3]))
+    result = search_comments(sys.argv[1], sys.argv[2], sys.argv[3])
+    print(result)

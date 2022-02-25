@@ -1,6 +1,7 @@
-# Linear Ticket Search Action
+# Search pull-request comments Action
 
-Searches a pull-request for any Linear ticket reference. Fails if it doesn't find any.
+Searches a pull-request for any comment left by a specific user. If no comment is found, the step fails.
+Searches through both simple and review comments.
 
 ## Installation
 
@@ -16,16 +17,13 @@ jobs:
     container: python:3.7-slim
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Search Linear ticket
+      - name: Search pull-request comments
         uses: peterkrauz/search-pull-request-comments@v0.0.2
         env:
           REQUIRED_COMMENT_USER: "john-doe"
-          EVENT_DETAILS: ${{ toJSON(github) }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_DETAILS: ${{ toJSON(github.event) }}
 ```
 
-The step will succeed if there's any comment written by `john-doe` in your pull-request.
-Otherwise, it'll fail.
+In this setup, the step will succeed if there's any comment written by `john-doe` in your pull-request.
+If `john-doe` did not comment in this pull-request, the job will fail.
