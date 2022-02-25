@@ -12,7 +12,7 @@ name: <name goes here>
 on: pull_request
 
 jobs:
-  search_linear_ticket:
+  search_pull_request_comments:
     runs-on: ubuntu-latest
     container: python:3.7-slim
 
