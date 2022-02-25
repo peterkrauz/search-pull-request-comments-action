@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Search Linear ticket
-        uses: peterkrauz/search-pull-request-comments@v1
+        uses: peterkrauz/search-pull-request-comments@v0.0.2
         env:
           REQUIRED_COMMENT_USER: "john-doe"
           EVENT_DETAILS: ${{ toJSON(github) }}
