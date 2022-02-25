@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Search pull-request comments
-        uses: peterkrauz/search-pull-request-comments@v0.0.5
+        uses: peterkrauz/search-pull-request-comments@v0.0.7
         env:
           REQUIRED_COMMENT_USER: "john-doe"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
