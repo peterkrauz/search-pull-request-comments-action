@@ -16,7 +16,7 @@ def search_comments(github_info, token: str, required_user: str):
     if isinstance(github_info, str):
         github_info = loads(github_info)
 
-    pr_details = loads(github_info)["event"]["pull_request"]
+    pr_details = github_info["event"]["pull_request"]
     links = pr_details["_links"]
 
     simple_comments = fetch(links["comments"]["href"], token)
