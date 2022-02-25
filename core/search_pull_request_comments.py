@@ -11,7 +11,7 @@ def fetch(url: str, token: str) -> list:
     return requests.get(url, headers=headers).json()
 
 
-def search_comments(github_info, token: str, required_user: str):
+def search_comments(github_info, token: str, required_user):
 
     if isinstance(github_info, str):
         github_info = loads(github_info)
@@ -24,7 +24,7 @@ def search_comments(github_info, token: str, required_user: str):
     review_comments = fetch(links["review_comments"]["href"], token)
 
     users_that_left_a_comment = [c["user"]["login"] for c in (simple_comments + review_comments)]
-    required_user_has_commented = required_user in users_that_left_a_comment
+    required_user_has_commented = str(required_user) in users_that_left_a_comment
 
     if required_user_has_commented:
         return 0
