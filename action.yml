@@ -1,5 +1,5 @@
-name: "Search Linear Ticket"
-description: "Searches a Pull-request for a Linear ticket reference"
+name: "Search pull-request comments"
+description: "Verifies if a given user has left a comment on the pull-request"
 
 branding:
   icon: "truck"
