@@ -1,0 +1,10 @@
+name: "Search Linear Ticket"
+description: "Searches a Pull-request for a Linear ticket reference"
+
+branding:
+  icon: "truck"
+  color: "purple"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
