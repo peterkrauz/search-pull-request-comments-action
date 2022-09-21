@@ -12,7 +12,6 @@ def fetch(url: str, token: str) -> list:
 
 
 def search_comments(github_info, token: str, required_user):
-
     if isinstance(github_info, str):
         github_info = loads(github_info)
 
@@ -26,14 +25,18 @@ def search_comments(github_info, token: str, required_user):
     users_that_left_a_comment = [c["user"]["login"] for c in (simple_comments + review_comments)]
     required_user_has_commented = str(required_user) in users_that_left_a_comment
 
-    if required_user_has_commented:
-        return 0
-
-    return 1
+    return {
+        "comments": users_that_left_a_comment,
+        "required_user_has_commented": required_user_has_commented
+    }
 
 
 if __name__ == "__main__":
     import sys
 
     result = search_comments(sys.argv[1], sys.argv[2], sys.argv[3])
-    print(result)
+
+    if result["required_user_has_commented"]:
+        print(0)
+    else:
+        print(result["comments"])

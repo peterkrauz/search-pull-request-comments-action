@@ -9,6 +9,7 @@ echo "Result: $result"
 if [ "$result" = "0" ]; then
     echo "User that was required to comment did leave a comment - all good!"
 else
-    echo "Couldn't find any comment from the required user"
+    echo "Couldn't find any comment from the required user\n"
+    echo "Here's everyone that did comment: $result"
     exit 1
 fi
