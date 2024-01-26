@@ -1,5 +1,5 @@
 import logging
-from json import loads, dumps
+from json import loads
 
 import requests
 
@@ -22,7 +22,14 @@ def search_comments(github_info, token: str, required_user):
     simple_comments = fetch(links["comments"]["href"], token)
     review_comments = fetch(links["review_comments"]["href"], token)
 
-    users_that_left_a_comment = [c["user"]["login"] for c in (simple_comments + review_comments)]
+    try:
+        all_comments = (simple_comments + review_comments)
+    except Exception:
+        print("simple_comments:", simple_comments)
+        print("review_comments:", review_comments)
+        all_comments = []
+
+    users_that_left_a_comment = [c["user"]["login"] for c in all_comments]
     required_user_has_commented = str(required_user) in users_that_left_a_comment
 
     return {
