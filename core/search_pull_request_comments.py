@@ -14,6 +14,8 @@ def fetch(url: str, token: str) -> list:
     }
     print("Making a request to", url)
     print()
+    print("with headers:", headers)
+    print()
     response = requests.get(url, headers=headers)
     print("status:", response.status_code)
     print()
