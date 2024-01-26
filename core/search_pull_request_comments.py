@@ -1,5 +1,5 @@
 import logging
-from json import loads
+from json import loads, dumps
 
 import requests
 
@@ -7,11 +7,16 @@ logger = logging.getLogger(__name__)
 
 
 def fetch(url: str, token: str) -> list:
-    headers = {"Accept": "application/vnd.github+json", "Authorization": f"token {token}"}
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "X-Github-Api-Version": "2022-11-28",
+        "Authorization": f"token {token}",
+    }
     print("Making a request to", url)
     print()
     response = requests.get(url, headers=headers)
     print("status:", response.status_code)
+    print()
     return response.json()
 
 
@@ -21,6 +26,10 @@ def search_comments(github_info, token: str, required_user):
 
     if "event" in github_info:
         github_info = github_info["event"]
+
+    print("github_info:")
+    print(dumps(github_info, indent=4))
+    print()
 
     links = github_info["pull_request"]["_links"]
     simple_comments = fetch(links["comments"]["href"], token)
