@@ -12,6 +12,7 @@ def fetch(url: str, token: str) -> list:
         "X-Github-Api-Version": "2022-11-28",
         "Authorization": f"Bearer {token}",
     }
+    print("Brrr:", f"Bearer {token}")
     print("Making a request to", url)
     print()
     print("with headers:", headers)
