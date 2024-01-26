@@ -6,18 +6,13 @@ import requests
 logger = logging.getLogger(__name__)
 
 
-def fetch_review_comments(url: str, token: str) -> list:
+def fetch(url: str, token: str) -> list:
     headers = {"Accept": "application/vnd.github+json", "Authorization": f"token {token}"}
     print("Making a request to", url)
     print()
-    return requests.get(url, headers=headers).json()
-
-
-def fetch_issue_comments(url: str, token: str) -> list:
-    headers = {"Accept": "application/vnd.github+json", "Authorization": f"token {token}"}
-    print("Making a request to", url)
-    print()
-    return requests.get(url, headers=headers).json()
+    response = requests.get(url, headers=headers)
+    print("status:", response.status_code)
+    return response.json()
 
 
 def search_comments(github_info, token: str, required_user):
@@ -28,8 +23,8 @@ def search_comments(github_info, token: str, required_user):
         github_info = github_info["event"]
 
     links = github_info["pull_request"]["_links"]
-    simple_comments = fetch_issue_comments(links["comments"]["href"], token)
-    review_comments = fetch_review_comments(links["review_comments"]["href"], token)
+    simple_comments = fetch(links["comments"]["href"], token)
+    review_comments = fetch(links["review_comments"]["href"], token)
 
     try:
         all_comments = (simple_comments + review_comments)
