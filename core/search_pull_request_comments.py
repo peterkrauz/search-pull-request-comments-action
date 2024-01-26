@@ -10,7 +10,7 @@ def fetch(url: str, token: str) -> list:
     headers = {
         "Accept": "application/vnd.github+json",
         "X-Github-Api-Version": "2022-11-28",
-        "Authorization": f"token {token}",
+        "Authorization": f"Bearer {token}",
     }
     print("Making a request to", url)
     print()
