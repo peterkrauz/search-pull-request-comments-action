@@ -27,3 +27,12 @@ jobs:
 
 In this setup, the step will succeed if there's any comment written by `john-doe` in your pull-request.
 If `john-doe` did not comment in this pull-request, the job will fail.
+
+### Multiple users
+
+You can specify multiple users by separating them with commas. The step will succeed if **any** of the listed users has commented:
+
+```yml
+env:
+  REQUIRED_COMMENT_USER: "linear[bot],linear-code[bot]"
+```
