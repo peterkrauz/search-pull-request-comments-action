@@ -7,13 +7,15 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-
-      - uses: JasonEtco/build-and-tag-action@v2
+      - name: Update major version tag
+        uses: richardsimko/update-tag@aab2434e9a5040687874aa39d1c6377ec0cb0d94
+        with:
+          tag_name: v0
         env:
           GITHUB_TOKEN: ${{ github.token }}
