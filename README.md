@@ -1,7 +1,7 @@
 # Search pull-request comments Action
 
 Searches a pull-request for any comment left by a specific user. If no comment is found, the step fails.
-Searches through both simple and review comments.
+Searches through both issue comments and review comments, with full pagination support.
 
 ## Installation
 
@@ -14,11 +14,10 @@ on: pull_request
 jobs:
   search_pull_request_comments:
     runs-on: ubuntu-latest
-    container: python:3.7-slim
 
     steps:
       - name: Search pull-request comments
-        uses: peterkrauz/search-pull-request-comments@v0.0.8
+        uses: peterkrauz/search-pull-request-comments@v0
         env:
           REQUIRED_COMMENT_USER: "john-doe"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
