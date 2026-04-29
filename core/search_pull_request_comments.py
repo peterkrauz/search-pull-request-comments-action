@@ -23,7 +23,11 @@ def search_comments(github_info, token: str, required_user):
     review_comments = fetch(links["review_comments"]["href"], token)
 
     users_that_left_a_comment = [c["user"]["login"] for c in (simple_comments + review_comments)]
-    required_user_has_commented = str(required_user) in users_that_left_a_comment
+
+    required_users = [u.strip() for u in str(required_user).split(",")]
+    required_user_has_commented = any(
+        u in users_that_left_a_comment for u in required_users
+    )
 
     return {
         "comments": users_that_left_a_comment,
